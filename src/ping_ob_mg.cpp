@@ -45,9 +45,9 @@
 #include "visual_perception/CylinderFitting.h"
 #include "visual_perception/Cylinder.h"
 #include "visual_perception/SphereFitting.h"
-#include "visual_perception/ConeFitting.h"
+//#include "visual_perception/ConeFitting.h"
 #include "visual_perception/Sphere.h"
-#include "visual_perception/Cone.h"
+//#include "visual_perception/Cone.h"
 #include "visual_perception/ParallelepipedFitting.h"
 
 
@@ -234,38 +234,38 @@ int main(int argc, char **argv)
       //float dist_sph_cent = pcl::pointToPlaneDistanceSigned (sphere_fitting_srv.response.sphere.pose.pose.position,  a,  b,  c,  d);
       //sleep(1);
 
-      if((float)sphere_fitting_srv.response.I<(double)0.82)
-      {
-      visual_perception::ConeFitting cone_fitting_srv;
-      cone_fitting_srv.request.cluster=clusters;
-
-      cone_fitting_srv.request.n_object=i;  
-
-     ROS_INFO("cone fitting service  waiting for service on topic cone_fitting_srv");
-     if (!ros::service::call(service_name4, cone_fitting_srv))
-     {
-       ROS_ERROR("Call to cone fitting service failed");
-       exit(0);
-     }
-      else 
-     {    
-       if (cone_fitting_srv.response.result != cone_fitting_srv.response.SUCCESS)
-       {
-        ROS_ERROR("Segmentation service returned error %d", cone_fitting_srv.response.result);
-        exit(0);
-       }
-
-       ROS_INFO("Call to cone fitting DONE !!!");
-
- 
-       visual_perception::Cone cone;    
-       cone = cone_fitting_srv.response.cone;
-       ROS_INFO("Altezza del cono %f  e angolo di apertura %f", (float)cone.h ,(float)cone.angle);
-       ROS_INFO("Cone fitting DONE !!!");
-       ROS_INFO("Indice di qualita del fitting %f",(float)cone_fitting_srv.response.I);
-      }
-       
-       float dist_con_cent = pcl::pointToPlaneDistanceSigned (cone_fitting_srv.response.cone.pose.pose.position,  a,  b,  c,  d);
+// //       if((float)sphere_fitting_srv.response.I<(double)0.82)
+// //       {
+// //       visual_perception::ConeFitting cone_fitting_srv;
+// //       cone_fitting_srv.request.cluster=clusters;
+// 
+//       cone_fitting_srv.request.n_object=i;  
+// 
+//      ROS_INFO("cone fitting service  waiting for service on topic cone_fitting_srv");
+//      if (!ros::service::call(service_name4, cone_fitting_srv))
+//      {
+//        ROS_ERROR("Call to cone fitting service failed");
+//        exit(0);
+//      }
+//       else 
+//      {    
+//        if (cone_fitting_srv.response.result != cone_fitting_srv.response.SUCCESS)
+//        {
+//         ROS_ERROR("Segmentation service returned error %d", cone_fitting_srv.response.result);
+//         exit(0);
+//        }
+// 
+//        ROS_INFO("Call to cone fitting DONE !!!");
+// 
+//  
+//        visual_perception::Cone cone;    
+//        cone = cone_fitting_srv.response.cone;
+//        ROS_INFO("Altezza del cono %f  e angolo di apertura %f", (float)cone.h ,(float)cone.angle);
+//        ROS_INFO("Cone fitting DONE !!!");
+//        ROS_INFO("Indice di qualita del fitting %f",(float)cone_fitting_srv.response.I);
+//       }
+//        
+//        float dist_con_cent = pcl::pointToPlaneDistanceSigned (cone_fitting_srv.response.cone.pose.pose.position,  a,  b,  c,  d);
       //sleep(2);
       visual_perception::ParallelepipedFitting parallelepiped_fitting_srv;
       parallelepiped_fitting_srv.request.cluster=clusters;

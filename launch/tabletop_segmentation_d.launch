@@ -6,7 +6,8 @@
     </node> 
 
     <!-- <arg name="tabletop_segmentation_points_in" default="/camera/depth_registered/points" />  -->
-    <arg name="tabletop_segmentation_points_in" default="/head_asus/head_asus/depth_registered/points" /> 
+     <arg name="tabletop_segmentation_points_in" default="/head_asus/head_asus/depth_registered/points" />  
+<!--     <arg name="tabletop_segmentation_points_in" default="/pacman_vision/processed_scene" /> -->
       <!-- <arg name="tabletop_segmentation_points_in" default=" /head_asus/head_asus/depth/image_raw" />  -->
     <arg name="tabletop_segmentation_convert_to_base_link" default="false" />
     <arg name="tabletop_segmentation_clustering_voxel_size" default="0.001" />

@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp message_generation std_msgs
 find_package(Boost REQUIRED COMPONENTS system)
 
 find_package(PCL 1.7 REQUIRED)
-
+include_directories(${PCL_INCLUDE_DIRS})
 link_directories(
   ${PCL_LIBRARY_DIRS}
   )
@@ -115,9 +115,9 @@ add_executable(cylinder_fitting src/cylinder_fitting.cpp)
 #add_executable(ping_cylinder_fitting src/ping_cylinder_fitting.cpp)
 add_executable(ping_tabletop_node src/ping_tabletop_node.cpp)
 add_executable(object_managing src/object_managing.cpp)
-add_executable(ping_ob_mg src/ping_ob_mg.cpp)
+#add_executable(ping_ob_mg src/ping_ob_mg.cpp)
 add_executable(sphere_fitting src/sphere_fitting.cpp)
-add_executable(cone_fitting src/cone_fitting.cpp)
+#add_executable(cone_fitting src/cone_fitting.cpp)
 add_executable(parallelepiped_fitting src/parallelepiped_fitting.cpp)
 add_executable(new_parallelepiped_fitting src/new_parallelepiped_fitting.cpp)
 
@@ -135,9 +135,9 @@ add_dependencies(cylinder_fitting tabletop_segmentation_gencpp visual_perception
 add_dependencies(ping_tabletop_node tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
 add_dependencies(object_managing tabletop_segmentation_gencpp visual_perception_genlisp marker_generator visual_perception_gen_cpp) 
  #grasp_planner_gen_cpp)
-add_dependencies(ping_ob_mg tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
+#add_dependencies(ping_ob_mg tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
 add_dependencies(sphere_fitting tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
-add_dependencies(cone_fitting tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
+#add_dependencies(cone_fitting tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
 add_dependencies(parallelepiped_fitting tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
 add_dependencies(new_parallelepiped_fitting tabletop_segmentation_gencpp visual_perception_genlisp marker_generator)
 
@@ -148,9 +148,9 @@ target_link_libraries(cylinder_fitting ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 #target_link_libraries(ping_cylinder_fitting ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(ping_tabletop_node ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(object_managing ${catkin_LIBRARIES} ${PCL_LIBRARIES})
-target_link_libraries(ping_ob_mg ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+#target_link_libraries(ping_ob_mg ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(sphere_fitting ${catkin_LIBRARIES} ${PCL_LIBRARIES})
-target_link_libraries(cone_fitting ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+#target_link_libraries(cone_fitting ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(parallelepiped_fitting ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(new_parallelepiped_fitting ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 

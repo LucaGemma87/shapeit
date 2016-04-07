@@ -51,10 +51,10 @@
 #include "visual_perception/CylinderFitting.h"
 #include "visual_perception/Cylinder.h"
 #include "visual_perception/SphereFitting.h"
-#include "visual_perception/ConeFitting.h"
+//#include "visual_perception/ConeFitting.h"
 #include "visual_perception/ParallelepipedFitting.h"
 #include "visual_perception/Sphere.h"
-#include "visual_perception/Cone.h"
+//#include "visual_perception/Cone.h"
 
 
 #include "grasp_planner/Trajectory.h"
@@ -145,12 +145,12 @@ bool ObjectManager::serviceCallback(ObjectManaging::Request &request, ObjectMana
   
   int cyl = 0;
   int sph = 0;
-  int con = 0;   
+  //int con = 0;   
   int plan = 0;
 
   float I_cyl[10];
   float I_sph[10];
-  float I_con[10];
+  //float I_con[10];
   float I_plan[10];
 
   float I_cyl_best_fit = (float)0;
@@ -160,11 +160,11 @@ bool ObjectManager::serviceCallback(ObjectManaging::Request &request, ObjectMana
   
   visual_perception::Cylinder cylinder_resp[10];
   visual_perception::Sphere sphere_resp[10];
-  visual_perception::Cone cone_resp[10];
+  //visual_perception::Cone cone_resp[10];
   visual_perception::Plane plane_resp[10];
   visual_perception::Cylinder cylinder_best_fit;
   visual_perception::Sphere sphere_best_fit;
-  visual_perception::Cone cone_best_fit;
+  //visual_perception::Cone cone_best_fit;
   visual_perception::Plane plane_best_fit;
 
   
@@ -443,11 +443,12 @@ bool ObjectManager::serviceCallback(ObjectManaging::Request &request, ObjectMana
     }
     if (!nh.ok()) exit(0);
    
-    if((float)I_cyl_best_fit> (float)I_sph_best_fit & (float)I_cyl_best_fit > (float)I_con_best_fit & (float)I_cyl_best_fit> (float)I_plan_best_fit)
+    if((float)I_cyl_best_fit> (float)I_sph_best_fit & (float)I_cyl_best_fit> (float)I_plan_best_fit)
     {
       ROS_INFO("Start grasp planning for the cylinder");      
       trajectory_manager_online_srv.request.ob=(int)1;  
       trajectory_manager_online_srv.request.cylinder=cylinder_best_fit;
+             ROS_INFO ("TrajectoryDemosManager:Success in receving the cylinder transformation with 7 elements (Orient(x,y,z,w),Pos(x,y,z)): %f, %f ,%f, %f, %f, %f, %f",cylinder_best_fit.pose.pose.orientation.x, cylinder_best_fit.pose.pose.orientation.y, cylinder_best_fit.pose.pose.orientation.z, cylinder_best_fit.pose.pose.orientation.w,cylinder_best_fit.pose.pose.position.x,  cylinder_best_fit.pose.pose.position.y,  cylinder_best_fit.pose.pose.position.z);
       ROS_INFO("trajectory_manager_online_srv service  waiting for service on topic trajectory_manager_online_srv");
       if (!ros::service::call(service_name6, trajectory_manager_online_srv))
       {
@@ -475,7 +476,7 @@ bool ObjectManager::serviceCallback(ObjectManaging::Request &request, ObjectMana
       }
     }
     
-    if(I_sph_best_fit> I_cyl_best_fit & I_sph_best_fit > I_con_best_fit & I_sph_best_fit> I_plan_best_fit)
+    if(I_sph_best_fit> I_cyl_best_fit & I_sph_best_fit> I_plan_best_fit)
     {
       trajectory_manager_online_srv.request.ob=(int)2;  
       trajectory_manager_online_srv.request.sphere=sphere_best_fit; 
@@ -539,7 +540,7 @@ bool ObjectManager::serviceCallback(ObjectManaging::Request &request, ObjectMana
     //   }  
     // }
     
-    if(I_plan_best_fit> I_cyl_best_fit & I_plan_best_fit > I_sph_best_fit & I_plan_best_fit> I_con_best_fit)
+    if(I_plan_best_fit> I_cyl_best_fit & I_plan_best_fit > I_sph_best_fit )
     {
       trajectory_manager_online_srv.request.ob=4;  
       trajectory_manager_online_srv.request.plane=plane_best_fit; 
